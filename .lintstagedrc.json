@@ -1,0 +1,6 @@
+{
+  "src/**/*.{js,jsx,ts,tsx,json}": [
+    "prettier --write --cache .",
+    "eslint . --fix --cache --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  ]
+}
