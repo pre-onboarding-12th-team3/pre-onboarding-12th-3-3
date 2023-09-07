@@ -22,7 +22,10 @@ const Form = () => {
   }, [searchText]);
 
   useEffect(() => {
-    if (isError) alert(error);
+    if (isError) {
+      alert(error);
+      setSearchText('');
+    }
   }, [isError]);
 
   return (
