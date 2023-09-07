@@ -1,5 +1,7 @@
+import { Form } from '@/components';
+
 const MainPage = () => {
-  return <div>Main Page</div>;
+  return <Form />;
 };
 
 export default MainPage;
