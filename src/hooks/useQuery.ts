@@ -1,6 +1,5 @@
+import { CANNOT_SEARCH_REG } from '@/constants';
 import testByReg from '@/utils/testByReg';
-
-const CANNOT_SEARCH_REG = /^[ㄱ-ㅎa-zA-Z0-9]+$/;
 
 const useQuery = () => {
   const checkSearchable = (searchText: string) => {
