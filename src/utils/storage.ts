@@ -7,10 +7,10 @@ const setCachedData = (key: string, data: CacheContextTypes) => {
   sessionStorage.setItem(CACHE_KEY, JSON.stringify(cachedData));
 };
 
-const getCachedData = (key: string): CacheContextTypes | null => {
-  const cachedData = sessionStorage.getItem(key);
-  if (cachedData) {
-    return JSON.parse(cachedData);
+const getCachedData = (key: string) => {
+  const cachedData = JSON.parse(sessionStorage.getItem(CACHE_KEY) || '{}');
+  if (cachedData[key]) {
+    return cachedData[key];
   }
   return null;
 };
