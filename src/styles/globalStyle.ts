@@ -1,6 +1,11 @@
 import { createGlobalStyle, css } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+  :root{
+    --Primary : #017be9;
+    --DarkenPrimary : #07589e;
+  }
+
   a{
     text-decoration: none;
     color: inherit;
@@ -32,7 +37,12 @@ const GlobalStyles = createGlobalStyle`
     outline: none;
   }
   #root{
-
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
