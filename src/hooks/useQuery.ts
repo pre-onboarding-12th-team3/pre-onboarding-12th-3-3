@@ -11,6 +11,8 @@ const useQuery = (searchText: string) => {
   const staleTime = nowDate + CACHE_TIME;
 
   const [data, setData] = useState<SearchData[] | null>([]);
+  const [error, setError] = useState<string>('');
+  const [isError, setIsError] = useState<boolean>(false);
 
   const callApi = async () => {
     await getSearchData(searchText)
@@ -18,13 +20,21 @@ const useQuery = (searchText: string) => {
         setData(data);
         setCachedData(searchText, { data, deadDate: staleTime });
       })
-      .catch((error) => alert(error));
+      .catch((error) => {
+        setIsError(true);
+        setError(error.code);
+      });
   };
 
   const checkStaleState = (cachedData: CacheContextTypes) => {
     const { data, deadDate } = cachedData;
     if (deadDate > nowDate) setData(data);
     else callApi();
+  };
+
+  const initState = () => {
+    setIsError(false);
+    setError('');
   };
 
   const checkSearchable = () => {
@@ -35,12 +45,14 @@ const useQuery = (searchText: string) => {
     const stopSearch = checkSearchable();
     if (stopSearch) return setData(null);
 
+    initState();
+
     const cachedData = getCachedData(searchText);
     if (cachedData) checkStaleState(cachedData);
     else callApi();
   };
 
-  return { data, fetch };
+  return { data, error, isError, fetch };
 };
 
 export default useQuery;

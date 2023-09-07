@@ -8,7 +8,7 @@ import { EventTypes } from '@/types/types';
 const Form = () => {
   const [searchText, setSearchText] = useState<string>('');
 
-  const { data, fetch } = useQuery(searchText);
+  const { data, error, isError, fetch } = useQuery(searchText);
 
   const changeSearchText = (event: EventTypes['changeInput']) => {
     const text = event.target.value;
@@ -19,6 +19,10 @@ const Form = () => {
     // 디바운스 필요
     if (searchText) fetch();
   }, [searchText]);
+
+  useEffect(() => {
+    if (isError) alert(error);
+  }, [isError]);
 
   return (
     <Section>
