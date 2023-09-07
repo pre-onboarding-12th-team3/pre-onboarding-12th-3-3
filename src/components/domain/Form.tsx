@@ -2,12 +2,15 @@ import { styled } from 'styled-components';
 
 import { Input, List } from '@/components';
 
-const TITLE = '국내 모든 임상시험 검색하고<br>온라인으로 참여하기';
-
 const Form = () => {
   return (
     <Section>
-      <Title dangerouslySetInnerHTML={{ __html: TITLE }} />
+      <Title>
+        국내 모든 임상시험 검색하고
+        <br />
+        온라인으로 참여하기
+      </Title>
+
       <Input />
       <List />
     </Section>
