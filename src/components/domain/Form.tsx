@@ -1,8 +1,17 @@
+import { useState } from 'react';
 import { styled } from 'styled-components';
 
 import { Input, List } from '@/components';
+import { EventTypes } from '@/types/types';
 
 const Form = () => {
+  const [searchText, setSearchText] = useState<string>('');
+
+  const changeSearchText = (event: EventTypes['changeInput']) => {
+    const text = event.target.value;
+    setSearchText(text);
+  };
+
   return (
     <Section>
       <Title>
@@ -11,7 +20,7 @@ const Form = () => {
         온라인으로 참여하기
       </Title>
 
-      <Input />
+      <Input searchText={searchText} changeSearchText={changeSearchText} />
       <List />
     </Section>
   );
