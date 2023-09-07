@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { getSearchData } from '@/apis/api';
 import { CACHE_TIME, CANNOT_SEARCH_REG } from '@/constants';
-import { SearchData } from '@/types/types';
+import { CacheContextTypes, SearchData } from '@/types/types';
 import { getCachedData, setCachedData } from '@/utils/storage';
 import testByReg from '@/utils/testByReg';
 
@@ -21,6 +21,12 @@ const useQuery = (searchText: string) => {
       .catch((error) => alert(error));
   };
 
+  const checkStaleState = (cachedData: CacheContextTypes) => {
+    const { data, deadDate } = cachedData;
+    if (deadDate > nowDate) setData(data);
+    else callApi();
+  };
+
   const checkSearchable = () => {
     return testByReg(searchText, CANNOT_SEARCH_REG);
   };
@@ -29,8 +35,8 @@ const useQuery = (searchText: string) => {
     const stopSearch = checkSearchable();
     if (stopSearch) return setData(null);
 
-    const cacheData = getCachedData(searchText);
-    if (cacheData) setData(cacheData.data);
+    const cachedData = getCachedData(searchText);
+    if (cachedData) checkStaleState(cachedData);
     else callApi();
   };
 
