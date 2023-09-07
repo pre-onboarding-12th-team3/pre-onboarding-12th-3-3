@@ -14,3 +14,8 @@ export interface EventTypes {
   changeInput: ChangeEvent<HTMLInputElement>;
   form: FormEvent<HTMLFormElement>;
 }
+
+export interface SearchData {
+  sickCd: string;
+  sickNm: string;
+}

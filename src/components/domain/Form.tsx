@@ -8,7 +8,7 @@ import { EventTypes } from '@/types/types';
 const Form = () => {
   const [searchText, setSearchText] = useState<string>('');
 
-  const { fetch } = useQuery();
+  const { data, fetch } = useQuery();
 
   const changeSearchText = (event: EventTypes['changeInput']) => {
     const text = event.target.value;
@@ -27,7 +27,7 @@ const Form = () => {
       </Title>
 
       <Input searchText={searchText} changeSearchText={changeSearchText} />
-      <List />
+      <List searchKeyword={searchText} searchData={data} />
     </Section>
   );
 };
