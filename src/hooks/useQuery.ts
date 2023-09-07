@@ -14,6 +14,10 @@ const useQuery = (searchText: string) => {
   const [error, setError] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
 
+  const remove = () => {
+    setData([]);
+  };
+
   const callApi = async () => {
     await getSearchData(searchText)
       .then(({ data }) => {
@@ -52,7 +56,7 @@ const useQuery = (searchText: string) => {
     else callApi();
   };
 
-  return { data, error, isError, fetch };
+  return { data, error, isError, fetch, remove };
 };
 
 export default useQuery;

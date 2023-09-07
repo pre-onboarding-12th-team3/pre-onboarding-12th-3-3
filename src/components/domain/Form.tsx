@@ -8,11 +8,12 @@ import { EventTypes } from '@/types/types';
 const Form = () => {
   const [searchText, setSearchText] = useState<string>('');
 
-  const { data, error, isError, fetch } = useQuery(searchText);
+  const { data, error, isError, fetch, remove } = useQuery(searchText);
 
   const changeSearchText = (event: EventTypes['changeInput']) => {
     const text = event.target.value;
     setSearchText(text);
+    remove();
   };
 
   useEffect(() => {
