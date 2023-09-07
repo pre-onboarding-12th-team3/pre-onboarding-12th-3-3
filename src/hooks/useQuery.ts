@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { getSearchData } from '@/apis/api';
 import { CACHE_TIME, CANNOT_SEARCH_REG } from '@/constants';
 import { SearchData } from '@/types/types';
-import { setCachedData } from '@/utils/storage';
+import { getCachedData, setCachedData } from '@/utils/storage';
 import testByReg from '@/utils/testByReg';
 
 const useQuery = (searchText: string) => {
@@ -29,7 +29,9 @@ const useQuery = (searchText: string) => {
     const stopSearch = checkSearchable();
     if (stopSearch) return setData(null);
 
-    callApi();
+    const cacheData = getCachedData(searchText);
+    if (cacheData) setData(cacheData.data);
+    else callApi();
   };
 
   return { data, fetch };
