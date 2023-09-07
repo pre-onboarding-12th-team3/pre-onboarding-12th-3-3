@@ -1,15 +1,32 @@
 import { BiSearchAlt2 } from '@react-icons/all-files/bi/BiSearchAlt2';
+import { ChangeEvent } from 'react';
 import { styled } from 'styled-components';
 
 import { a11yHidden } from '@/styles/globalStyle';
+import { EventTypes } from '@/types/types';
 
-const Input = () => {
+interface Props {
+  searchText: string;
+  changeSearchText: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Input = ({ searchText, changeSearchText }: Props) => {
+  const preventReload = (event: EventTypes['form']) => {
+    event.preventDefault();
+  };
+
   return (
-    <Form>
+    <Form onSubmit={preventReload}>
       <fieldset>
         <Legend>검색폼</Legend>
         <Label htmlFor="searchInput">검색</Label>
-        <SearchInput id="searchInput" type="search" placeholder="질환명을 입력해 주세요." />
+        <SearchInput
+          id="searchInput"
+          type="search"
+          placeholder="질환명을 입력해 주세요."
+          value={searchText}
+          onChange={changeSearchText}
+        />
 
         <SearchBtn aria-label="검색" type="submit">
           <BiSearchAlt2 aria-hidden />
