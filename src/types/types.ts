@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 
 export interface SearchApiResponse {
   sickCd: string;
@@ -12,4 +12,5 @@ export interface CacheContextTypes {
 
 export interface EventTypes {
   changeInput: ChangeEvent<HTMLInputElement>;
+  form: FormEvent<HTMLFormElement>;
 }

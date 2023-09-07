@@ -3,6 +3,7 @@ import { ChangeEvent } from 'react';
 import { styled } from 'styled-components';
 
 import { a11yHidden } from '@/styles/globalStyle';
+import { EventTypes } from '@/types/types';
 
 interface Props {
   searchText: string;
@@ -10,8 +11,12 @@ interface Props {
 }
 
 const Input = ({ searchText, changeSearchText }: Props) => {
+  const preventReload = (event: EventTypes['form']) => {
+    event.preventDefault();
+  };
+
   return (
-    <Form>
+    <Form onSubmit={preventReload}>
       <fieldset>
         <Legend>검색폼</Legend>
         <Label htmlFor="searchInput">검색</Label>
