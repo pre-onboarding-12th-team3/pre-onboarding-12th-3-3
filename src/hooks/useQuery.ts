@@ -1,16 +1,23 @@
 import { useState } from 'react';
 
 import { getSearchData } from '@/apis/api';
-import { CANNOT_SEARCH_REG } from '@/constants';
+import { CACHE_TIME, CANNOT_SEARCH_REG } from '@/constants';
 import { SearchData } from '@/types/types';
+import { setCachedData } from '@/utils/storage';
 import testByReg from '@/utils/testByReg';
 
 const useQuery = (searchText: string) => {
+  const nowDate = Date.now();
+  const staleTime = nowDate + CACHE_TIME;
+
   const [data, setData] = useState<SearchData[] | null>([]);
 
   const callApi = async () => {
     await getSearchData(searchText)
-      .then(({ data }) => setData(data))
+      .then(({ data }) => {
+        setData(data);
+        setCachedData(searchText, { data, deadDate: staleTime });
+      })
       .catch((error) => alert(error));
   };
 

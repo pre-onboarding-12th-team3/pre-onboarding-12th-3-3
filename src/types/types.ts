@@ -1,12 +1,7 @@
 import { ChangeEvent, FormEvent } from 'react';
 
-export interface SearchApiResponse {
-  sickCd: string;
-  sickNm: string;
-}
-
 export interface CacheContextTypes {
-  data: SearchApiResponse;
+  data: SearchData[];
   deadDate: number;
 }
 
