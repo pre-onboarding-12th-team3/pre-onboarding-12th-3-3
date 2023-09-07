@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BASE_URL, END_POINT } from '@/constants';
 import { SearchData } from '@/types/types';
 
+
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });

@@ -1,7 +1,10 @@
-import { CacheContextTypes } from '../types/types';
+import { CACHE_KEY } from '@/constants';
+import { CacheContextTypes } from '@/types/types';
 
 const setCachedData = (key: string, data: CacheContextTypes) => {
-  sessionStorage.setItem(key, JSON.stringify(data));
+  const cachedData = JSON.parse(sessionStorage.getItem(CACHE_KEY) || '{}');
+  cachedData[key] = data;
+  sessionStorage.setItem(CACHE_KEY, JSON.stringify(cachedData));
 };
 
 const getCachedData = (key: string): CacheContextTypes | null => {
