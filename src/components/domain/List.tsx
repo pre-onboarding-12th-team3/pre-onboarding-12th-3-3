@@ -1,65 +1,36 @@
 import { BiSearchAlt2 } from '@react-icons/all-files/bi/BiSearchAlt2';
-import { useState } from 'react';
 import { styled } from 'styled-components';
 
-const List = () => {
-  const [isResults, setIsResults] = useState(false);
+import { SearchData } from '@/types/types';
 
-  console.log(setIsResults); // 커밋 때문에 임시로 넣어둠 작업 하실 때 지우시면 됩니다.
+interface Props {
+  searchKeyword: string;
+  searchData: SearchData[] | null;
+}
+
+const List = ({ searchKeyword, searchData }: Props) => {
+  const highlightSearchKeyword = (resultText: string) => {
+    const splitResultText = resultText.split(searchKeyword);
+    return (
+      <p>
+        {splitResultText[0]}
+        <span>{searchKeyword}</span>
+        {splitResultText[1]}
+      </p>
+    );
+  };
 
   return (
     <Wrapper>
       <RecommendSpan>추천 검색어</RecommendSpan>
-      {isResults ? (
+      {searchData ? (
         <Ul>
-          <Li>
-            <BiSearchAlt2 aria-hidden />
-            <p>
-              달리 분류된 질환에서의 <span>담낭</span>, 담도 및 췌장의 장애
-            </p>
-          </Li>
-          <Li>
-            <BiSearchAlt2 aria-hidden />
-            <p>
-              달리 분류된 질환에서의 <span>담낭</span>, 담도 및 췌장의 장애
-            </p>
-          </Li>
-          <Li>
-            <BiSearchAlt2 aria-hidden />
-            <p>
-              달리 분류된 질환에서의 <span>담낭</span>, 담도 및 췌장의 장애
-            </p>
-          </Li>
-          <Li>
-            <BiSearchAlt2 aria-hidden />
-            <p>
-              달리 분류된 질환에서의 <span>담낭</span>, 담도 및 췌장의 장애
-            </p>
-          </Li>
-          <Li>
-            <BiSearchAlt2 aria-hidden />
-            <p>
-              달리 분류된 질환에서의 <span>담낭</span>, 담도 및 췌장의 장애
-            </p>
-          </Li>
-          <Li>
-            <BiSearchAlt2 aria-hidden />
-            <p>
-              달리 분류된 질환에서의 <span>담낭</span>, 담도 및 췌장의 장애
-            </p>
-          </Li>
-          <Li>
-            <BiSearchAlt2 aria-hidden />
-            <p>
-              달리 분류된 질환에서의 <span>담낭</span>, 담도 및 췌장의 장애
-            </p>
-          </Li>
-          <Li>
-            <BiSearchAlt2 aria-hidden />
-            <p>
-              달리 분류된 질환에서의 <span>담낭</span>, 담도 및 췌장의 장애
-            </p>
-          </Li>
+          {searchData.map((data) => (
+            <Li key={data.sickCd}>
+              <BiSearchAlt2 aria-hidden />
+              {highlightSearchKeyword(data.sickNm)}
+            </Li>
+          ))}
         </Ul>
       ) : (
         <span>검색어 없음</span>
