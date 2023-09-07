@@ -10,6 +10,6 @@ export const axiosInstance = axios.create({
 export const getSearchData = async (keyword: string) => {
   console.info('calling api');
 
-  const res = await axiosInstance.get<SearchData>(`${END_POINT}?q=${keyword}`);
+  const res = await axiosInstance.get<SearchData[]>(`${END_POINT}?q=${keyword}`);
   return res;
 };

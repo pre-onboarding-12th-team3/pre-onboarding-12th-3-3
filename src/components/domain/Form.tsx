@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
 import { Input, List } from '@/components';
@@ -8,15 +8,17 @@ import { EventTypes } from '@/types/types';
 const Form = () => {
   const [searchText, setSearchText] = useState<string>('');
 
-  const { data, fetch } = useQuery();
+  const { data, fetch } = useQuery(searchText);
 
   const changeSearchText = (event: EventTypes['changeInput']) => {
     const text = event.target.value;
     setSearchText(text);
-
-    // 디바운스 필요
-    if (text) fetch(text);
   };
+
+  useEffect(() => {
+    // 디바운스 필요
+    if (searchText) fetch();
+  }, [searchText]);
 
   return (
     <Section>
