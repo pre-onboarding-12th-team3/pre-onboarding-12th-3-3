@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
-import { getSearchData } from '@/apis/api';
 import { Input, List } from '@/components';
 import useQuery from '@/hooks/useQuery';
 import useDebounce from '@/hooks/useDebounce';
@@ -9,7 +8,6 @@ import { EventTypes } from '@/types/types';
 
 const Form = () => {
   const [searchText, setSearchText] = useState<string>('');
-  const [searchResult, setSearchResult] = useState<string[]>([]);
 
   // useDebounce 를 사용한 예시입니다. 로컬 캐싱부분이 생략된 단계라 수정하시면 됩니다. (14-33)
   const debouncedSearchText = useDebounce(searchText, 400);
@@ -20,6 +18,7 @@ const Form = () => {
     const text = event.target.value;
     setSearchText(text);
     remove();
+    debouncedSearchText()
   };
 
   useEffect(() => {
