@@ -36,7 +36,7 @@ const Form = () => {
         온라인으로 참여하기
       </Title>
 
-      <Input searchText={searchText} changeSearchText={changeSearchText} />
+      <Input searchText={searchText} changeSearchText={changeSearchText} fetch={fetch} />
       <List searchKeyword={searchText} searchData={data} />
     </Section>
   );

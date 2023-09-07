@@ -1,5 +1,4 @@
 import { BiSearchAlt2 } from '@react-icons/all-files/bi/BiSearchAlt2';
-import { ChangeEvent } from 'react';
 import { styled } from 'styled-components';
 
 import { a11yHidden } from '@/styles/globalStyle';
@@ -7,10 +6,11 @@ import { EventTypes } from '@/types/types';
 
 interface Props {
   searchText: string;
-  changeSearchText: (event: ChangeEvent<HTMLInputElement>) => void;
+  changeSearchText: (event: EventTypes['changeInput']) => void;
+  fetch: () => void;
 }
 
-const Input = ({ searchText, changeSearchText }: Props) => {
+const Input = ({ searchText, changeSearchText, fetch }: Props) => {
   const preventReload = (event: EventTypes['form']) => {
     event.preventDefault();
   };
@@ -28,7 +28,7 @@ const Input = ({ searchText, changeSearchText }: Props) => {
           onChange={changeSearchText}
         />
 
-        <SearchBtn aria-label="검색" type="submit">
+        <SearchBtn aria-label="검색" type="submit" onClick={fetch}>
           <BiSearchAlt2 aria-hidden />
         </SearchBtn>
       </fieldset>
