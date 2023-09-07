@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm i
-      - run: npm run lint-diff
+      - run: npm run lint
         working-directory: .
         env:
           BASE: ${{github.base_ref}}
