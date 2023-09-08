@@ -9,7 +9,7 @@ import { EventTypes } from '@/types/types';
 const Form = () => {
   const [searchText, setSearchText] = useState<string>('');
 
-  const { data, error, isError, fetch, remove } = useQuery(searchText);
+  const { data, error, fetch, remove } = useQuery(searchText);
 
   const changeSearchText = (event: EventTypes['changeInput']) => {
     const text = event.target.value;
@@ -24,11 +24,11 @@ const Form = () => {
   }, [searchText]);
 
   useEffect(() => {
-    if (isError) {
+    if (error) {
       alert(error);
       setSearchText('');
     }
-  }, [isError]);
+  }, [error]);
 
   return (
     <Section>
