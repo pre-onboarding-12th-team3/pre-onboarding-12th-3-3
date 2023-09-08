@@ -9,17 +9,6 @@ interface Props {
 }
 
 const List = ({ searchKeyword, searchData }: Props) => {
-  const highlightSearchKeyword = (resultText: string) => {
-    const splitResultText = resultText.split(searchKeyword);
-    return (
-      <p>
-        {splitResultText[0]}
-        <span>{searchKeyword}</span>
-        {splitResultText[1]}
-      </p>
-    );
-  };
-
   return (
     <Wrapper>
       <RecommendSpan>추천 검색어</RecommendSpan>
@@ -28,7 +17,7 @@ const List = ({ searchKeyword, searchData }: Props) => {
           {searchData.map((data) => (
             <Li key={data.sickCd}>
               <BiSearchAlt2 aria-hidden />
-              {highlightSearchKeyword(data.sickNm)}
+              {highlightSearchKeyword(data.sickNm, searchKeyword)}
             </Li>
           ))}
         </Ul>
@@ -36,6 +25,17 @@ const List = ({ searchKeyword, searchData }: Props) => {
         <span>검색어 없음</span>
       )}
     </Wrapper>
+  );
+};
+
+const highlightSearchKeyword = (resultText: string, searchKeyword: string) => {
+  const splitResultText = resultText.split(searchKeyword);
+  return (
+    <p>
+      {splitResultText[0]}
+      <span>{searchKeyword}</span>
+      {splitResultText[1]}
+    </p>
   );
 };
 
