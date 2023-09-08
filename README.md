@@ -30,7 +30,7 @@
 
 ## 🎬 프로젝트 로컬 실행 방법
 
-1. 상단 서버 레포에 들어가 git clone, npm start를 하여 서버를 실행합니다.
+1. 상단 [서버 레포](https://github.com/walking-sunset/assignment-api)에 접속해 git clone, npm start를 하여 서버를 실행합니다.
 
 2. 본 repository를 clone합니다.
 
@@ -43,7 +43,7 @@ $ git clone https://github.com/pre-onboarding-12th-team3/pre-onboarding-12th-3-3
 ```bash
 폴더 최상단 루트에 .env파일을 생성하고 안에
 VITE_API_URL = 'http://localhost:4000/'
-를 입력하고 저장해주세요
+를 작성하고 저장해주세요
 ```
 
 4. 의존성 패키지를 설치합니다.
