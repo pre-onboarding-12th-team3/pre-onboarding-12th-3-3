@@ -47,7 +47,7 @@ const Form = () => {
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
       />
-      <List searchKeyword={searchText} searchData={data} selectedItem={selectedItem} />
+      {searchText.length > 0 && <List searchKeyword={searchText} searchData={data} selectedItem={selectedItem} />}
     </Section>
   );
 };
