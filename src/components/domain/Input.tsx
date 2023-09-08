@@ -24,6 +24,7 @@ const Input = ({ searchText, changeSearchText, fetch, dataLength, selectedItem, 
 
   const selectKeyword = (e: React.KeyboardEvent, dataLength: number) => {
     const { key } = e;
+    if (e.nativeEvent.isComposing) return;
     if (key !== 'ArrowUp' && key !== 'ArrowDown') return;
     e.preventDefault();
     if (key === 'ArrowUp' && selectedItem > 0) {
