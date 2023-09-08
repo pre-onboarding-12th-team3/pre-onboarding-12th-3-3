@@ -21,8 +21,10 @@ const useQuery = (searchText: string) => {
   const callApi = async () => {
     await getSearchData(searchText)
       .then(({ data }) => {
-        setData(data);
         setCachedData(searchText, { data, deadDate: staleTime });
+        setData(() => {
+          return data.length > 0 ? data : null;
+        });
       })
       .catch((error) => {
         setIsError(true);
