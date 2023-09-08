@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
 import { Input, List } from '@/components';
+import useDebounce from '@/hooks/useDebounce';
 import useQuery from '@/hooks/useQuery';
 import { EventTypes } from '@/types/types';
 
@@ -16,9 +17,10 @@ const Form = () => {
     remove();
   };
 
+  const debouncedFetch = useDebounce(400);
+
   useEffect(() => {
-    // 디바운스 필요
-    if (searchText) fetch();
+    if (searchText) debouncedFetch(() => fetch());
   }, [searchText]);
 
   useEffect(() => {
