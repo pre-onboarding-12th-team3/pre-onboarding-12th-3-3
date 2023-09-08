@@ -22,33 +22,37 @@
 
 <br/>
 
-## 🚀 배포 링크
+## 🚀 서버 레포
 
-<!-- 배포 링크: [wanted-pre-onboarding-12th-2week.s3-website.ap-northeast-2.amazonaws.com](http://wanted-pre-onboarding-12th-2week.s3-website.ap-northeast-2.amazonaws.com) -->
+서버 레포 : [https://github.com/walking-sunset/assignment-api](https://github.com/walking-sunset/assignment-api)
 
 <br/>
 
 ## 🎬 프로젝트 로컬 실행 방법
 
-1. 본 repository를 clone합니다.
+1. 상단 [서버 레포](https://github.com/walking-sunset/assignment-api)에 접속해 git clone, npm start를 하여 서버를 실행합니다.
+
+2. 본 repository를 clone합니다.
 
 ```bash
 $ git clone https://github.com/pre-onboarding-12th-team3/pre-onboarding-12th-3-3.git
 ```
 
-2. 의존성 패키지를 설치합니다.
+3. .env파일 설정
+
+```bash
+폴더 최상단 루트에 .env파일을 생성하고 안에
+VITE_API_URL = 'http://localhost:4000/'
+를 작성하고 저장해주세요
+```
+
+4. 의존성 패키지를 설치합니다.
 
 ```bash
 npm install
 ```
 
-3. json-server를 실행합니다.
-
-```bash
-npm run server
-```
-
-4. 개발 서버를 실행합니다.
+5. 개발 서버를 실행합니다.
 
 ```bash
 npm run dev
@@ -96,7 +100,7 @@ npm run dev
 - 세션 스토리지를 사용해서 캐시 데이터 보관
 
   - 이유 :
-  - 프론트엔드 서버 메모리와 분리된 storage를 사용
+    - 프론트엔드 서버 메모리와 분리된 storage를 사용
   - 전역으로 관리하는 것에 비해 Page Reload되어도 캐시 데이터 유지
   - 다른 브라우저 스토리지랑 다르게 탭을 닫으면 데이터가 삭제되므로 관리가 원활
 
@@ -125,8 +129,8 @@ npm run dev
 - stale로 전환되는 시간 `Date.now() + UNIT`을 추천 검색어 데이터와 함께 저장
 - 세션 스토리지에서 데이터를 꺼내왔을 때, Date.now()와 비교해서 데이터의 stale 여부 판단
 - 이유 :
-- stale한 데이터의 기준을 5분으로 설정해서 5분 이후에 오는 데이터 요청일 경우 stale하다고 판단하고 최신화된 데이터를 제공.
-- `Date.now()`는 `new Date().getTime()`과 의미론적으로 동일하지만 중간에 `Date` 객체를 만들지 않는다는 점이 다름. 따라서 현재 프로젝트에서는 `Date.now()`를 사용하는 것이 더 빠르고 가비지 컬렉터의 일을 덜어준다는 장점이 있음.
+  - stale한 데이터의 기준을 5분으로 설정해서 5분 이후에 오는 데이터 요청일 경우 stale하다고 판단하고 최신화된 데이터를 제공.
+  - `Date.now()`는 `new Date().getTime()`과 의미론적으로 동일하지만 중간에 `Date` 객체를 만들지 않는다는 점이 다름. 따라서 현재 프로젝트에서는 `Date.now()`를 사용하는 것이 더 빠르고 가비지 컬렉터의 일을 덜어준다는 장점이 있음.
 
 <br/>
 
@@ -170,7 +174,7 @@ npm run dev
 - 검색 Input Focus,Blur 조건으로 KeyDown 동작
 - 검색어 수정 시 목록 아이템 선택 값 초기화
 - 스크롤 대응하여 지속적인 선택 아이템 표시
-- 이유 : 유저 경험 향상
+  - 이유 : 유저 경험 향상
 
 <br/>
 
