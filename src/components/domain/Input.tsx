@@ -8,11 +8,29 @@ interface Props {
   searchText: string;
   changeSearchText: (event: EventTypes['changeInput']) => void;
   fetch: () => void;
+  dataLength: number;
+  selectedItem: number;
+  setSelectedItem: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Input = ({ searchText, changeSearchText, fetch }: Props) => {
+const Input = ({ searchText, changeSearchText, fetch, dataLength, selectedItem, setSelectedItem }: Props) => {
   const preventReload = (event: EventTypes['form']) => {
     event.preventDefault();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    selectKeyword(e, dataLength);
+  };
+
+  const selectKeyword = (e: React.KeyboardEvent, dataLength: number) => {
+    const { key } = e;
+    if (key !== 'ArrowUp' && key !== 'ArrowDown') return;
+    e.preventDefault();
+    if (key === 'ArrowUp' && selectedItem > 0) {
+      setSelectedItem((prev) => prev - 1);
+    } else if (key === 'ArrowDown' && selectedItem < dataLength - 1) {
+      setSelectedItem((prev) => prev + 1);
+    }
   };
 
   return (
@@ -25,7 +43,12 @@ const Input = ({ searchText, changeSearchText, fetch }: Props) => {
           type="search"
           placeholder="질환명을 입력해 주세요."
           value={searchText}
-          onChange={changeSearchText}
+          onChange={(e) => {
+            changeSearchText(e);
+            setSelectedItem(-1);
+          }}
+          onKeyDown={handleKeyDown}
+          onBlur={() => setSelectedItem(-1)}
         />
 
         <SearchBtn aria-label="검색" type="submit" onClick={fetch}>

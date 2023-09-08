@@ -1,4 +1,5 @@
 import { BiSearchAlt2 } from '@react-icons/all-files/bi/BiSearchAlt2';
+import { useEffect, useRef } from 'react';
 import { styled } from 'styled-components';
 
 import { SearchData } from '@/types/types';
@@ -6,9 +7,12 @@ import { SearchData } from '@/types/types';
 interface Props {
   searchKeyword: string;
   searchData: SearchData[] | null;
+  selectedItem: number;
 }
 
-const List = ({ searchKeyword, searchData }: Props) => {
+const List = ({ searchKeyword, searchData, selectedItem }: Props) => {
+  const scrollRef = useRef<HTMLUListElement>(null);
+
   const highlightSearchKeyword = (resultText: string) => {
     const splitResultText = resultText.split(searchKeyword);
     return (
@@ -20,13 +24,18 @@ const List = ({ searchKeyword, searchData }: Props) => {
     );
   };
 
+  useEffect(() => {
+    const selected = scrollRef.current?.querySelector('.selected');
+    selected && selected.scrollIntoView({ block: 'nearest' });
+  }, [selectedItem]);
+
   return (
     <Wrapper>
       <RecommendSpan>추천 검색어</RecommendSpan>
       {searchData ? (
-        <Ul>
-          {searchData.map((data) => (
-            <Li key={data.sickCd}>
+        <Ul ref={scrollRef}>
+          {searchData.map((data, idx) => (
+            <Li key={data.sickCd} className={selectedItem === idx ? 'selected' : ''} selected={selectedItem === idx}>
               <BiSearchAlt2 aria-hidden />
               {highlightSearchKeyword(data.sickNm)}
             </Li>
@@ -66,11 +75,12 @@ const Ul = styled.ul`
   overflow-y: auto;
 `;
 
-const Li = styled.li`
+const Li = styled.li<{ selected: boolean }>`
   display: flex;
   align-items: center;
   padding: 0.5rem;
   cursor: pointer;
+  background-color: ${({ selected }) => (selected ? '#eee' : '')};
   > svg {
     margin-right: 0.5rem;
   }

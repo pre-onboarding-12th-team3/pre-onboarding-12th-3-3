@@ -8,6 +8,7 @@ import { EventTypes } from '@/types/types';
 
 const Form = () => {
   const [searchText, setSearchText] = useState<string>('');
+  const [selectedItem, setSelectedItem] = useState(-1);
 
   const { data, error, isError, fetch, remove } = useQuery(searchText);
 
@@ -38,8 +39,15 @@ const Form = () => {
         온라인으로 참여하기
       </Title>
 
-      <Input searchText={searchText} changeSearchText={changeSearchText} fetch={fetch} />
-      <List searchKeyword={searchText} searchData={data} />
+      <Input
+        searchText={searchText}
+        changeSearchText={changeSearchText}
+        fetch={fetch}
+        dataLength={data ? data.length : 0}
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+      />
+      <List searchKeyword={searchText} searchData={data} selectedItem={selectedItem} />
     </Section>
   );
 };
