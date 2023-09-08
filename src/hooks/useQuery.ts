@@ -10,12 +10,12 @@ const useQuery = (searchText: string) => {
   const nowDate = Date.now();
   const staleTime = nowDate + CACHE_TIME;
 
-  const [data, setData] = useState<SearchData[] | null>([]);
+  const [data, setData] = useState<SearchData[] | null>(null);
   const [error, setError] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
 
   const remove = () => {
-    setData([]);
+    setData(null);
   };
 
   const callApi = async () => {
