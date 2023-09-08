@@ -13,17 +13,6 @@ interface Props {
 const List = ({ searchKeyword, searchData, selectedItem }: Props) => {
   const scrollRef = useRef<HTMLUListElement>(null);
 
-  const highlightSearchKeyword = (resultText: string) => {
-    const splitResultText = resultText.split(searchKeyword);
-    return (
-      <p>
-        {splitResultText[0]}
-        <span>{searchKeyword}</span>
-        {splitResultText[1]}
-      </p>
-    );
-  };
-
   useEffect(() => {
     const selected = scrollRef.current?.querySelector('.selected');
     selected && selected.scrollIntoView({ block: 'nearest' });
@@ -37,7 +26,7 @@ const List = ({ searchKeyword, searchData, selectedItem }: Props) => {
           {searchData.map((data, idx) => (
             <Li key={data.sickCd} className={selectedItem === idx ? 'selected' : ''} selected={selectedItem === idx}>
               <BiSearchAlt2 aria-hidden />
-              {highlightSearchKeyword(data.sickNm)}
+              {highlightSearchKeyword(data.sickNm, searchKeyword)}
             </Li>
           ))}
         </Ul>
@@ -45,6 +34,17 @@ const List = ({ searchKeyword, searchData, selectedItem }: Props) => {
         <span>검색어 없음</span>
       )}
     </Wrapper>
+  );
+};
+
+const highlightSearchKeyword = (resultText: string, searchKeyword: string) => {
+  const splitResultText = resultText.split(searchKeyword);
+  return (
+    <p>
+      {splitResultText[0]}
+      <span>{searchKeyword}</span>
+      {splitResultText[1]}
+    </p>
   );
 };
 
