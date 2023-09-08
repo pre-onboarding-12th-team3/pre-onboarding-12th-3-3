@@ -22,9 +22,10 @@
 
 <br/>
 
-## 🚀 서버 레포
+## 🚀 배포 링크 및 서버 레포
 
-서버 레포 : [https://github.com/walking-sunset/assignment-api](https://github.com/walking-sunset/assignment-api)
+- 배포 링크: [pre-onboarding-12th-3-3.vercel.app](pre-onboarding-12th-3-3.vercel.app)
+- 서버 레포 : [https://github.com/walking-sunset/assignment-api](https://github.com/walking-sunset/assignment-api)
 
 <br/>
 
